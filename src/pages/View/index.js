@@ -34,6 +34,9 @@ const View = () => {
     Title,
   } = useSelector(getDetails);
 
+  const ratings = { Imdb_Rating: imdbRating, Imdb_Votes: imdbVotes, Runtime: Runtime, Year: Year };
+  const info = { Director, Actors, Genre, Language, Awards };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,44 +52,20 @@ const View = () => {
         <LeftSection>
           <MovieTitle>{Title}</MovieTitle>
           <RatingsContainer>
-            <Wrapper1>
-              <TextSecondary>Imdb Ratings</TextSecondary>
-              <TextPrimary>{imdbRating}</TextPrimary>
-            </Wrapper1>
-            <Wrapper1>
-              <TextSecondary>Imdb Votes</TextSecondary>
-              <TextPrimary>{imdbVotes}</TextPrimary>
-            </Wrapper1>
-            <Wrapper1>
-              <TextSecondary>Runtime</TextSecondary>
-              <TextPrimary>{Runtime}</TextPrimary>
-            </Wrapper1>
-            <Wrapper1>
-              <TextSecondary>Year</TextSecondary>
-              <TextPrimary>{Year}</TextPrimary>
-            </Wrapper1>
+            {Object.keys(ratings).map((item, index) => (
+              <Wrapper1 key={index}>
+                <TextSecondary>{item.replace("_", " ")}</TextSecondary>
+                <TextPrimary>{ratings[item]}</TextPrimary>
+              </Wrapper1>
+            ))}
           </RatingsContainer>
           <TextPrimary>{Plot}</TextPrimary>
-          <Wrapper2>
-            <TextSecondary>Director</TextSecondary>
-            <TextPrimary>{Director}</TextPrimary>
-          </Wrapper2>
-          <Wrapper2>
-            <TextSecondary>Actors</TextSecondary>
-            <TextPrimary>{Actors}</TextPrimary>
-          </Wrapper2>
-          <Wrapper2>
-            <TextSecondary>Genre</TextSecondary>
-            <TextPrimary>{Genre}</TextPrimary>
-          </Wrapper2>
-          <Wrapper2>
-            <TextSecondary>Language</TextSecondary>
-            <TextPrimary>{Language}</TextPrimary>
-          </Wrapper2>
-          <Wrapper2>
-            <TextSecondary>Awards</TextSecondary>
-            <TextPrimary>{Awards}</TextPrimary>
-          </Wrapper2>
+          {Object.keys(info).map((item, index) => (
+            <Wrapper2 key={index}>
+              <TextSecondary>{item}</TextSecondary>
+              <TextPrimary>{info[item]}</TextPrimary>
+            </Wrapper2>
+          ))}
         </LeftSection>
         <RightSection>
           <img src={Poster} alt={Title} />

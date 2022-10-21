@@ -16,7 +16,7 @@ const Container = styled(Box)(({ theme }) => ({
 
 const Spinner = () => {
   const isLoading = useSelector((state) => state.loading);
-  console.log(isLoading);
+
   return (
     <Fade in={isLoading}>
       <Container>

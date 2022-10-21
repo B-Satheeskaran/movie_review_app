@@ -12,6 +12,12 @@ const instance = axios.create();
 instance.interceptors.request.use(
   (config) => {
     config.baseURL = "http://www.omdbapi.com";
+
+    config.params = {
+      apiKey: process.env.REACT_APP_API_KEY,
+      ...config.params,
+    };
+
     store.dispatch(toggleLoading());
     return config;
   },

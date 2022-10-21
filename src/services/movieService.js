@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "./axios";
-import { ApiKey } from "./apiKey";
 
 export const fetchMovies = createAsyncThunk(
   "movies/fetchAllMovies",
   async (value, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/?apiKey=${ApiKey}&s=${value}&type=movie`);
+      const response = await axios.get("", {
+        params: { s: value, type: "movie" },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -17,7 +18,9 @@ export const fetchSeries = createAsyncThunk(
   "movies/fetchSeries",
   async (value, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/?apiKey=${ApiKey}&s=${value}&type=series`);
+      const response = await axios.get("", {
+        params: { s: value, type: "series" },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -25,11 +28,13 @@ export const fetchSeries = createAsyncThunk(
   }
 );
 
-export const fetchMovieOrSeriesDetails = createAsyncThunk("Details/fetchSeries", async (imdbID) => {
-  console.log(imdbID);
-  const response = await axios.get(`/?apiKey=${ApiKey}&i=${imdbID}&Plot=full`).catch((error) => {
-    console.log("Movie details ", error);
-  });
-  console.log("response ", response.data);
-  return response.data;
-});
+export const fetchMovieOrSeriesDetails = createAsyncThunk(
+  "Details/fetchSeries",
+  async (imdbID, { rejectWithValue }) => {
+    const response = await axios.get("", { params: { i: imdbID, plot: "full" } }).catch((error) => {
+      rejectWithValue(error);
+    });
+
+    return response.data;
+  }
+);

@@ -13,14 +13,17 @@ const Header = ({ withSearch }) => {
 
   const dispatch = useDispatch();
 
-  const handleSearchFormSubmit = (event) => {
-    event.preventDefault();
-    if (value !== "") {
-      dispatch(fetchMovies(value));
-      dispatch(fetchSeries(value));
-      setValue("");
-    }
-  };
+  const handleSearchFormSubmit = React.useCallback(
+    (event) => {
+      event.preventDefault();
+      if (value !== "") {
+        dispatch(fetchMovies(value));
+        dispatch(fetchSeries(value));
+        setValue("");
+      }
+    },
+    [dispatch, value]
+  );
   return (
     <AppBar position='static'>
       <MuiToolbar disableGutters>
@@ -46,4 +49,4 @@ const Header = ({ withSearch }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

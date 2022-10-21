@@ -1,15 +1,16 @@
+import { Fragment } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./routes";
 import Loader from "./components/core/Spinner";
 
 function App() {
   return (
-    <div>
+    <Fragment>
       <BrowserRouter>
         <Router />
       </BrowserRouter>
       <Loader />
-    </div>
+    </Fragment>
   );
 }
 

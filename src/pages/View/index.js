@@ -17,9 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDetails, removeSelectedMovieOrSeries } from "../../store/features/MovieSlice";
 
 const View = () => {
-  const params = useParams();
-  const { id } = params;
-  const movieDetails = useSelector(getDetails);
+  const { id } = useParams();
 
   const {
     Year,
@@ -34,7 +32,8 @@ const View = () => {
     Language,
     Awards,
     Title,
-  } = movieDetails;
+  } = useSelector(getDetails);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

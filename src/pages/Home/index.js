@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NoResult } from "./styles";
 import MainLayout from "../../components/layout/Main";
 import { fetchMovies, fetchSeries } from "../../services/movieService";
-import { getAllMovies, getAllSeries } from "../../store/features/MovieSlice";
+import { getAllMovies, getAllSeries } from "../../store/features/movieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import MovieListing from "../../components/layout/MovieListing";
 
@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchMovies(movieName));
     dispatch(fetchSeries(seriesName));
-  }, []);
+  }, [dispatch]);
 
   const movies = useSelector(getAllMovies);
   const series = useSelector(getAllSeries);

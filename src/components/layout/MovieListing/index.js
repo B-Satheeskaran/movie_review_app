@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { ListContainer } from "./styles";
 import { useSelector } from "react-redux";
-import { getAllMovies, getAllSeries } from "../../../store/features/MovieSlice";
+import { getAllMovies, getAllSeries } from "../../../store/features/movieSlice";
 import MovieCard from "../../core/Card";
 import Slider from "react-slick";
 import { settings } from "../../../common/settings";

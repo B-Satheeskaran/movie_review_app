@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
-import movieReducer from "./features/MovieSlice";
+import movieReducer from "./features/movieSlice";
 import authReducer from "./features/authSlice";
-import loadingReducer from "./features/LoadingSlice";
+import loadingReducer from "./features/loadingSlice";
 
 const persistConfig = {
   key: "movie_review_app",

@@ -3,7 +3,6 @@ import store from "../../store";
 import { Container } from "./styles";
 import LoginForm from "../../components/forms/LoginForm";
 import { userLogin } from "../../services/authService";
-
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

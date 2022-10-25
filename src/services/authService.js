@@ -1,6 +1,5 @@
 import { API } from "./axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import store from "../store";
 
 export const userLogin = createAsyncThunk(`/auth/userLogin`, async (data, { rejectWithValue }) => {
   try {
@@ -27,22 +26,3 @@ export const refreshToken = createAsyncThunk(
     }
   }
 );
-
-export const forgotPassword = async (email) => {
-  try {
-    const response = await API.post("/auth/forgot-password", email);
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const resetPassword = async (data) => {
-  try {
-    const response = await API.post("/auth/password-reset", data);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};

@@ -14,7 +14,7 @@ import {
 import { useParams } from "react-router-dom";
 import { fetchMovieOrSeriesDetails } from "../../services/movieService";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, removeSelectedMovieOrSeries } from "../../store/features/MovieSlice";
+import { getDetails, removeSelectedMovieOrSeries } from "../../store/features/movieSlice";
 
 const View = () => {
   const { id } = useParams();

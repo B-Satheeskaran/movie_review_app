@@ -1,5 +1,6 @@
 import axios from "axios";
-import { toggleLoading } from "../store/features/LoadingSlice";
+import { toggleLoading } from "../store/features/loadingSlice";
+import { refreshToken } from "./authService";
 
 let store;
 
@@ -30,7 +31,11 @@ API.interceptors.response.use(
   },
   async (error) => {
     store.dispatch(toggleLoading());
-    return API(error.config);
+    if (error.response.status === 401) {
+      await store.dispatch(refreshToken());
+
+      return API(error.config);
+    }
   }
 );
 //---------------------------------------

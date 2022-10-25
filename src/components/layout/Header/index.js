@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { AppBar, useTheme, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
-import { MuiToolbar, Logo, MuiAvatar, Form, Button } from "./styles";
-import TextField from "../../core/TextField";
+import {
+  MuiToolbar,
+  Logo,
+  MuiAvatar,
+  Form,
+  SearchButton,
+  SearchField,
+  LogoutButton,
+} from "./styles";
 import { useDispatch } from "react-redux";
 import { fetchMovies, fetchSeries } from "../../../services/movieService";
 
-const Header = ({ withSearch }) => {
+const Header = ({ withSearch, handleLogoutButtonClick }) => {
   const [value, setValue] = useState("");
 
   const isMobile = useMediaQuery(useTheme().breakpoints.down("sm"));
@@ -24,6 +31,7 @@ const Header = ({ withSearch }) => {
     },
     [dispatch, value]
   );
+
   return (
     <AppBar position='static'>
       <MuiToolbar disableGutters>
@@ -33,17 +41,17 @@ const Header = ({ withSearch }) => {
 
         {withSearch && (
           <Form onSubmit={handleSearchFormSubmit}>
-            <TextField
+            <SearchField
               fullWidth
               placeholder='Search movie or series'
               value={value}
               onChange={(e) => setValue(e.target.value)}
             />
-            <Button type='submit' />
+            <SearchButton type='submit' />
           </Form>
         )}
 
-        {!isMobile && <MuiAvatar />}
+        <LogoutButton onClick={handleLogoutButtonClick} />
       </MuiToolbar>
     </AppBar>
   );

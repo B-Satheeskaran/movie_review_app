@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "./axios";
+import { OmdbAPI } from "./axios";
 
 export const fetchMovies = createAsyncThunk(
   "movies/fetchAllMovies",
   async (value, { rejectWithValue }) => {
     try {
-      const response = await axios.get("", {
+      const response = await OmdbAPI.get("", {
         params: { s: value, type: "movie" },
       });
       return response.data;
@@ -18,7 +18,7 @@ export const fetchSeries = createAsyncThunk(
   "movies/fetchSeries",
   async (value, { rejectWithValue }) => {
     try {
-      const response = await axios.get("", {
+      const response = await OmdbAPI.get("", {
         params: { s: value, type: "series" },
       });
       return response.data;
@@ -31,9 +31,11 @@ export const fetchSeries = createAsyncThunk(
 export const fetchMovieOrSeriesDetails = createAsyncThunk(
   "Details/fetchSeries",
   async (imdbID, { rejectWithValue }) => {
-    const response = await axios.get("", { params: { i: imdbID, plot: "full" } }).catch((error) => {
-      rejectWithValue(error);
-    });
+    const response = await OmdbAPI.get("", { params: { i: imdbID, plot: "full" } }).catch(
+      (error) => {
+        rejectWithValue(error);
+      }
+    );
 
     return response.data;
   }

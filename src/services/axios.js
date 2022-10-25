@@ -7,11 +7,37 @@ export const injectStore = (_store) => {
   store = _store;
 };
 
-const instance = axios.create();
+const API = axios.create();
+const OmdbAPI = axios.create();
 
-instance.interceptors.request.use(
+API.interceptors.request.use(
   (config) => {
-    config.baseURL = "http://www.omdbapi.com";
+    const token = store?.getState()?.auth?.accessToken;
+    config.baseURL = "/api/v1";
+    config.headers.authorization = `Bearer ${token}`;
+    store.dispatch(toggleLoading());
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+API.interceptors.response.use(
+  (response) => {
+    store.dispatch(toggleLoading());
+    return response;
+  },
+  async (error) => {
+    store.dispatch(toggleLoading());
+    return API(error.config);
+  }
+);
+//---------------------------------------
+
+OmdbAPI.interceptors.request.use(
+  (config) => {
+    config.baseURL = "/omdb";
 
     config.params = {
       apiKey: process.env.REACT_APP_API_KEY,
@@ -26,15 +52,15 @@ instance.interceptors.request.use(
   }
 );
 
-instance.interceptors.response.use(
+OmdbAPI.interceptors.response.use(
   (response) => {
     store.dispatch(toggleLoading());
     return response;
   },
   async (error) => {
     store.dispatch(toggleLoading());
-    return instance(error.config);
+    return API(error.config);
   }
 );
 
-export default instance;
+export { OmdbAPI, API };

@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchMovies(movieName));
     dispatch(fetchSeries(seriesName));
-  }, [dispatch]);
+  }, []);
 
   const movies = useSelector(getAllMovies);
   const series = useSelector(getAllSeries);

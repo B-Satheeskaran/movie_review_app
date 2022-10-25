@@ -21,6 +21,7 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => {
+        console.log(error.response);
         setError(error?.response?.data?.message || null);
         resetForm();
       });

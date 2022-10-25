@@ -4,9 +4,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const userLogin = createAsyncThunk(`/auth/userLogin`, async (data, { rejectWithValue }) => {
   try {
     const response = await API.post("/auth/login", data);
-
     return response.data.data;
   } catch (error) {
+    console.log(error);
     return rejectWithValue(error);
   }
 });

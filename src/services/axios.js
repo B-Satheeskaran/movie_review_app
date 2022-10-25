@@ -31,11 +31,13 @@ API.interceptors.response.use(
   },
   async (error) => {
     store.dispatch(toggleLoading());
+
     if (error.response.status === 401) {
       await store.dispatch(refreshToken());
 
       return API(error.config);
     }
+    return Promise.reject(error);
   }
 );
 //---------------------------------------

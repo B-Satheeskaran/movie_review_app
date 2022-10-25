@@ -52,12 +52,7 @@ const LoginForm = ({ handleLoginFormSubmit, errorMsg }) => {
                 helperText={touched.password && errors.password}
               />
             </Grid>
-            <Grid item mb={10}>
-              <ForgotPassword to='/forgot-password'>Forgot password?</ForgotPassword>
-            </Grid>
-            <Grid item mb={10}>
-              <BackendError text={errorMsg} />
-            </Grid>
+
             <Grid item mb={10}>
               <BackendError text={errorMsg} />
             </Grid>
